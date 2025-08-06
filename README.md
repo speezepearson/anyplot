@@ -8,14 +8,15 @@ Usage:
 
     anyplot INSTRUCTIONS [PATH]
 
-Examples:
+Example:
 
-    $ head -n3 data.txt
-    x=2983, y=15195452
-    x=325, y=3656021
-    x=20791, y=108369570
-    $ anyplot 'cdf of y' data.txt
-    $ anyplot 'scatter' <data.txt
+    $ head -n3 examples/server-logs.txt
+    2025-08-06T10:14:20Z clientIP="snip" requestID="22bb7385-6bee-45ed" responseTimeMS=6 responseBytes=3629 userAgent="Mozilla/5.0 (compatible; Company-Analyzer/1.0)"
+    2025-08-06T10:14:36Z clientIP="snip" requestID="" responseTimeMS=0 responseBytes=127 userAgent="Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+    2025-08-06T10:14:37Z clientIP="snip" requestID="7812c320-fcc4-4f9c" responseTimeMS=6 responseBytes=3629 userAgent="Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+    $ anyplot 'scatter plot of responseTimeMS vs time' examples/server-logs.txt
+
+![](example-server-logs.png)
 
 # Caching
 
