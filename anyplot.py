@@ -62,7 +62,7 @@ def ask_claude(messages: List[anthropic.types.MessageParam]) -> str:
 
 def get_final_code_block(text: str) -> str:
     import re
-    match = re.search(r'```\w*\n(.*)\n```\s*$', text, re.DOTALL)
+    match = re.search(r'```\w*\n(.*?)\n```\s*$', text, re.DOTALL)
     if not match:
         raise ValueError("No final code block found")
     return match.group(1)
@@ -81,6 +81,7 @@ def create_regex(lines: List[str], max_attempts: int = 5) -> Tuple[str, List[str
 ```
 
 Respond with a regular expression that matches all of the strings.
+Return the regex in a code block (``` ... ```) at the end of your message.
 
 Examples:
 
@@ -152,7 +153,7 @@ Output:
 
         messages.append({
             "role": "user",
-            "content": f"The regex failed to match the following lines:\n\n{chr(10).join(failures)}\n\nPlease fix the regex and provide ONLY the corrected regular expression, nothing else."
+            "content": f"The regex failed to match the following lines:\n\n{chr(10).join(failures)}\n\nPlease fix the regex."
         })
 
         response = ask_claude(messages)
@@ -227,10 +228,11 @@ The script should:
 
 Libraries available: plotly, numpy, scipy
 
-Return ONLY the Python script code, nothing else. The script should be complete and runnable."""
+Return the COMPLETE Python script in a code block (``` ... ```) at the end of your message. The script should be complete and runnable."""
 
     messages: List[anthropic.types.MessageParam] = [{"role": "user", "content": initial_prompt}]
 
+    print(f"Synthesizing script...", file=sys.stderr)
     response = ask_claude(messages)
     messages.append({"role": "assistant", "content": response})
 
