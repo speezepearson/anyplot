@@ -40,4 +40,4 @@ Examples:
 
 # Development Tips
 
-- Whenever you think you're done with a batch of changes, run `npm run typecheck`.
+- Whenever you think you're done with a batch of changes, run `mypy anyplot.py`.
