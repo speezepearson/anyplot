@@ -18,6 +18,35 @@ Example:
 
 ![](example-server-logs.png)
 
+# Installation
+
+```
+# download:
+git clone https://github.com/speezepearson/anyplot.git
+cd anyplot
+
+# install venv (if needed):
+python3 -m venv .venv
+deactivate
+source .venv/bin/activate
+pip install --upgrade pip
+
+# install dependencies:
+python3 -m pip install -r requirements.txt
+
+# authenticate:
+# (note extra space before cmd, to keep out of zsh history, assuming you have `setopt HIST_IGNORE_SPACE` in your .zshrc)
+$   export ANTHROPIC_API_KEY="your-key-here"
+
+# alias
+alias anyplot="$PWD/.venv/bin/python3 $PWD/anyplot.py"
+echo "alias anyplot='$PWD/.venv/bin/python3 $PWD/anyplot.py'" >> ~/.zshrc
+
+# run example:
+anyplot 'scatter plot of responseTimeMS vs time' examples/server-logs.txt
+```
+
+
 # Caching
 
 In order to avoid unnecessarily resynthesizing scripts, Anyplot remembers all of the scripts that it's written, along with the associated instructions and data-fingerprint. If you run it again with the same instructions and sufficiently-similar-looking data, it'll use the existing script, no LLM calls required.
