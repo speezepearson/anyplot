@@ -8,7 +8,9 @@ Usage:
 
     anyplot INSTRUCTIONS [PATH]
 
-Example:
+Note: `PATH` is optional: If a data file is not supplied in `PATH`, the tool reads from stdin; this enables piping data into `anyplot`.
+
+Example (costs $0.13 of Anthropic Claude API usage):
 
     $ head -n3 examples/server-logs.txt
     2025-08-06T10:14:20Z clientIP="snip" requestID="22bb7385-6bee-45ed" responseTimeMS=6 responseBytes=3629 userAgent="Mozilla/5.0 (compatible; Company-Analyzer/1.0)"
@@ -33,6 +35,8 @@ pip install --upgrade pip
 
 # install dependencies:
 python3 -m pip install -r requirements.txt
+
+# fund api key: ensure at least $1 balance: https://console.anthropic.com/settings/billing
 
 # authenticate:
 # (note extra space before cmd, to keep out of zsh history, assuming you have `setopt HIST_IGNORE_SPACE` in your .zshrc)
@@ -70,6 +74,12 @@ Example:
     $ head -n2 data.txt
     2.2678682154776793 -0.653177282888232
     -2.0490451614830945 -0.5921683028750352
+
+# LLM Cost
+
+- Running the tool costs $0 if it can re-use a previously-generated script.
+- If it has to re-generate the plotting script, it costs between $0.02 and $0.15 to run one of the files in `examples/`.
+- There is max-retry logic to prevent cost overruns if the LLM struggles to extract plottable data from the file, which can result in an example costing around $0.20 if the LLM has to make several attempts to regex-match the data.
 
     $ anyplot scatter data.txt  # new data, but very similar-looking; uses existing script
     Executing: ~/.cache/anyplot/scripts/435444d3f941b30bac5cb777ea3762df61182bf5f3a8576e9839bb4ba8c1aca4.py
