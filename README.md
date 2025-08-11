@@ -75,11 +75,11 @@ Example:
     2.2678682154776793 -0.653177282888232
     -2.0490451614830945 -0.5921683028750352
 
+    $ anyplot scatter data.txt  # new data, but very similar-looking; uses existing script
+    Executing: ~/.cache/anyplot/scripts/435444d3f941b30bac5cb777ea3762df61182bf5f3a8576e9839bb4ba8c1aca4.py
+
 # LLM Cost
 
 - Running the tool costs $0 if it can re-use a previously-generated script.
 - If it has to re-generate the plotting script, it costs between $0.02 and $0.15 to run one of the files in `examples/`.
 - There is max-retry logic to prevent cost overruns if the LLM struggles to extract plottable data from the file, which can result in an example costing around $0.20 if the LLM has to make several attempts to regex-match the data.
-
-    $ anyplot scatter data.txt  # new data, but very similar-looking; uses existing script
-    Executing: ~/.cache/anyplot/scripts/435444d3f941b30bac5cb777ea3762df61182bf5f3a8576e9839bb4ba8c1aca4.py
